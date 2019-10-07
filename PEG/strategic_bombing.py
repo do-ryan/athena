@@ -36,3 +36,16 @@ CF
 GF
 There are 2 disconnecting roads.
 """
+
+class UndirectedGraph():
+    def __init__(self):
+        self.edges = {}
+
+    def add_edge(self, n1, n2):
+        if n1 not in self.edges:
+            self.edges[n1] = [n2]
+        else:
+            self.edges[n1].append(n2)
+        
+        if n2 not in self.edges:
+            self.edges
