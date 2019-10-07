@@ -25,16 +25,30 @@ Sample Input
 1
 Sample Output
 Roberta wins in 3 strokes.
-6
 """
 # import datetime
 
 
 def inp():
     """Return list of integers from problem input"""
-    n = int(input())
-    ret = [int(input()) for _ in range(n)]
-    return ret, n
+    dist = int(input())
+    n_clubs = int(input())
+    club_dist = [int(input()) for _ in range(n)]
+    return dist, n_clubs, club_dist
+
+def num_strokes(dist, club_dist):
+
+    # for i in club_dist:
+    #     for j in range(i):
+    pass
 
 
-ret, n = inp()
+
+
+dist, n_clubs, club_dist = inp()
+
+res = num_strokes(dist, club_dist)
+if res:
+    print(f"Roberta wins in {res} strokes.")
+else:
+    print("Roberta acknowledges defeat.")
