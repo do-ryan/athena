@@ -39,13 +39,25 @@ There are 2 disconnecting roads.
 
 class UndirectedGraph():
     def __init__(self):
-        self.edges = {}
+        self.neighbours = {}
 
     def add_edge(self, n1, n2):
-        if n1 not in self.edges:
-            self.edges[n1] = [n2]
+        if n1 not in self.neighbours:
+            self.neighbours[n1] = [n2]
         else:
-            self.edges[n1].append(n2)
+            self.neighbours[n1].append(n2)
         
-        if n2 not in self.edges:
-            self.edges
+        if n2 not in self.neighbours:
+            self.neighbours[n2] = [n1]
+        else:
+            self.neighbours[n2].append(n1)
+
+def inp():
+    roads = []
+    while entry != "**":
+        entry = input()
+    return dist, n_clubs, club_dist
+
+if __name__ == "__main__":
+    graph = UndirectedGraph()
+
