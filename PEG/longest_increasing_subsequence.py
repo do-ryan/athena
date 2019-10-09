@@ -56,4 +56,5 @@ def longest_increasing_subsequence(integers, n):
     return max(lis)
 
 
+ret, n = inp()
 print(longest_increasing_subsequence(ret, n))
