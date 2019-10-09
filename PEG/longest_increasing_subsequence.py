@@ -37,10 +37,6 @@ def inp():
     return ret, n
 
 
-def naive_longest_increasing_subsequence(integers, n):
-    return
-
-
 def longest_increasing_subsequence(integers, n):
     """Return integer length of longest increasing subsequence from an ordered list of integers.
 
@@ -60,5 +56,4 @@ def longest_increasing_subsequence(integers, n):
     return max(lis)
 
 
-ret, n = inp()
 print(longest_increasing_subsequence(ret, n))
