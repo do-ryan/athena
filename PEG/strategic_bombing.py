@@ -70,7 +70,7 @@ if __name__ == "__main__":
 	2. Cycle detection? No, doesn't work. We end up finding non cycle nodes that are needed to get to B using approach 1 but explicitly looking for nodes not in cycles won't necessarily give nodes that are needed to get to B. 
         3. Remove edges one by one and run DFS to determine if edge is a bridge from A to B. O(V*(E+V))`
         4. Finding bridges: general bridge searching with traversal time. But only for path from A to B which is searched first. The current edge (v,to) is a bridge if and only if none of the vertices to and its descendants in the DFS edge traversal tree has a back-edge to vertex v or any of its ancestors. Indeed, this condition means that there is no other way from v to to except for edge (v,to).
-        low[v]=min⎧⎩⎨⎪⎪tin[v]tin[p]low[to] for all p for which (v,p) is a back edge for all to for which (v,to) is a tree edge. If low[to] > tin[v] then (v, to) is a bridge. The intuition is that if tin[v] >= low[to] then v has been reached by a back edge. If tin[v] == low[to] then to goes directly to v via back edge. https://cp-algorithms.com/graph/bridge-searching.html
+        low[v]=min⎧⎩⎨⎪⎪tin[v]tin[p]low[to] for all p for which (v,p) is a back edge for all to for which (v,to) is a tree edge. If low[to] > tin[v] then (v, to) is a bridge. The intuition is that if tin[v] >= low[to] then v has been reached by a back edge. If tin[v] == low[to] then to goes directly to v via back edge. Low and tin are assigned on the fly in a single DFS run. https://cp-algorithms.com/graph/bridge-searching.html
 """
     roads_graph = UndirectedGraph()
     inp(roads_graph)
