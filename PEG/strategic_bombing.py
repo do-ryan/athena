@@ -37,7 +37,9 @@ GF
 There are 2 disconnecting roads.
 """
 
+
 class UndirectedGraph():
+    """Mutable class. States can be changed externally."""
     def __init__(self):
         self.neighbours = {}
 
@@ -52,12 +54,22 @@ class UndirectedGraph():
         else:
             self.neighbours[n2].append(n1)
 
-def inp():
-    roads = []
+     def 
+
+def inp(roads_graph):
+    entry = input()
     while entry != "**":
+        roads_graph.add_edge(entry[0], entry[1])
         entry = input()
-    return dist, n_clubs, club_dist
+
 
 if __name__ == "__main__":
-    graph = UndirectedGraph()
+"""
+    Approaches:
+	1. Use DFS to find all possible paths from A to B. Intersection of nodes between A and B are crucial paths
+	2. Cycle detection? No, doesn't work. We end up finding non cycle nodes that are needed to get to B using approach 1 but explicitly looking for nodes not in cycles won't necessarily give nodes that are needed to get to B. 
+"""
+    roads_graph = UndirectedGraph()
+    inp(roads_graph)
+
 

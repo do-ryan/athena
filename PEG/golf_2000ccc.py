@@ -28,6 +28,7 @@ Roberta wins in 3 strokes.
 """
 # import datetime
 
+
 def inp():
     """Return list of integers from problem input"""
     dist = int(input())
@@ -35,24 +36,27 @@ def inp():
     club_dist = [int(input()) for _ in range(n_clubs)]
     return dist, n_clubs, club_dist
 
+
 def num_strokes(dist, club_dist):
 
-    best_strokes = [9999]*dist
+    best_strokes = [9999] * dist
 
     for this_dist, best_stroke in enumerate(best_strokes):
         for club in club_dist:
-            if club == (this_dist+1):
+            if club == (this_dist + 1):
                 best_strokes[this_dist] = 1
             else:
-                if (this_dist+1) - club >= 0:
-                    best_strokes[this_dist] = min(best_strokes[this_dist], best_strokes[this_dist-club] + 1)
+                if (this_dist + 1) - club >= 0:
+                    best_strokes[this_dist] = min(
+                        best_strokes[this_dist], best_strokes[this_dist - club] + 1)
 
-    return best_strokes[dist-1]
+    return best_strokes[dist - 1]
+
 
 if __name__ == "__main__":
     dist, n_clubs, club_dist = inp()
     res = num_strokes(dist, club_dist)
-    if res !=9999:
+    if res != 9999:
         print("Roberta wins in", res, "strokes.")
     else:
         print("Roberta acknowledges defeat.")
