@@ -66,8 +66,9 @@ def inp(roads_graph):
 if __name__ == "__main__":
 """
     Approaches:
-	1. Use DFS to find all possible paths from A to B. Intersection of nodes between A and B are crucial paths
+        1. Use DFS to find all possible paths from A to B. Intersection of nodes between A and B are crucial paths: superpolynomial
 	2. Cycle detection? No, doesn't work. We end up finding non cycle nodes that are needed to get to B using approach 1 but explicitly looking for nodes not in cycles won't necessarily give nodes that are needed to get to B. 
+        3. Remove edges one by one and run DFS to determine if edge is a bridge from A to B. O(V*(E+V))`
 """
     roads_graph = UndirectedGraph()
     inp(roads_graph)
