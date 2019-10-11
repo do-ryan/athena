@@ -38,23 +38,42 @@ There are 2 disconnecting roads.
 """
 
 
-class UndirectedGraph():
+class UndirectedGraph:
     """Mutable class. States can be changed externally."""
+
     def __init__(self):
         self.neighbours = {}
 
-    def add_edge(self, n1, n2):
+    def add_edge(self, n1: str, n2: str):
         if n1 not in self.neighbours:
             self.neighbours[n1] = [n2]
         else:
             self.neighbours[n1].append(n2)
-        
+
         if n2 not in self.neighbours:
             self.neighbours[n2] = [n1]
         else:
             self.neighbours[n2].append(n1)
 
-     def 
+    def dfs(self, root: str, visited: dict, omitted_path: frozenset):
+        visited[root] = True
+        for neighbour in self.neighbours[root]:
+            if not visited[neighbour] and {root, neighbour} != omitted_path:
+                self.dfs(neighbour, visited, omitted_path)
+        return visited
+
+    def detect_bridges_enroute(self, n1: str, n2: str):
+        """O(n^2) naive algorithm"""
+        distinct_paths = {frozenset((node[0], neighbour)) for node in self.neighbours.items() for neighbour in node[1]}
+        bridges = []
+        for omitted_path in distinct_paths:
+            if not self.dfs(n1, {key: False for key in road_graph.neighbours.keys()}, omitted_path)[n2]:
+                bridges.append(omitted_path)
+        for bridge in bridges:
+            print(''.join(bridge))
+        print("There are", len(bridges), "disconnecting roads.")
+        return
+            
 
 def inp(roads_graph):
     entry = input()
@@ -64,15 +83,16 @@ def inp(roads_graph):
 
 
 if __name__ == "__main__":
-"""
+    """
     Approaches:
-        1. Use DFS to find all possible paths from A to B. Intersection of nodes between A and B are crucial paths: superpolynomial
-	2. Cycle detection? No, doesn't work. We end up finding non cycle nodes that are needed to get to B using approach 1 but explicitly looking for nodes not in cycles won't necessarily give nodes that are needed to get to B. 
-        3. Remove edges one by one and run DFS to determine if edge is a bridge from A to B. O(V*(E+V))`
-        4. Finding bridges: general bridge searching with traversal time. But only for path from A to B which is searched first. The current edge (v,to) is a bridge if and only if none of the vertices to and its descendants in the DFS edge traversal tree has a back-edge to vertex v or any of its ancestors. Indeed, this condition means that there is no other way from v to to except for edge (v,to).
-        low[v]=min⎧⎩⎨⎪⎪tin[v]tin[p]low[to] for all p for which (v,p) is a back edge for all to for which (v,to) is a tree edge. If low[to] > tin[v] then (v, to) is a bridge. The intuition is that if tin[v] >= low[to] then v has been reached by a back edge. If tin[v] == low[to] then to goes directly to v via back edge. Low and tin are assigned on the fly in a single DFS run. https://cp-algorithms.com/graph/bridge-searching.html
-"""
-    roads_graph = UndirectedGraph()
-    inp(roads_graph)
+     1. Use DFS to find all possible paths from A to B. Intersection of nodes between A and B are crucial paths: superpolynomial
+     2. Cycle detection? No, doesn't work. We end up finding non cycle nodes that are needed to get to B using approach 1 but explicitly looking for nodes not in cycles won't necessarily give nodes that are needed to get to B. 
+     3. Remove edges one by one and run DFS to determine if edge is a bridge from A to B. O(V*(E+V))`
+     4. Finding bridges: general bridge searching with traversal time. But only for path from A to B which is searched first. The current edge (v,to) is a bridge if and only if none of the vertices to and its descendants in the DFS edge traversal tree has a back-edge to vertex v or any of its ancestors. Indeed, this condition means that there is no other way from v to to except for edge (v,to).
+     low[v]=min⎧⎩⎨⎪⎪tin[v]tin[p]low[to] for all p for which (v,p) is a back edge for all to for which (v,to) is a tree edge. If low[to] > tin[v] then (v, to) is a bridge. The intuition is that if tin[v] >= low[to] then v has been reached by a back edge. If tin[v] == low[to] then to goes directly to v via back edge. Low and tin are assigned on the fly in a single DFS run. https://cp-algorithms.com/graph/bridge-searching.html
+    """
+    road_graph = UndirectedGraph()
+    inp(road_graph)
+    road_graph.detect_bridges_enroute('A', 'B')
 
 
