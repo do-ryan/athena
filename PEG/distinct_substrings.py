@@ -77,7 +77,7 @@ def suffix_sort_recurse(order_list: list, order_list_range: int):
         return order_list
     next_order_list = [(order, order_list[i+order_list_range]) if (i+order_list_range < len(order_list))
                        else (order, -1) for i, order in enumerate(order_list)]
-    sort_index = {tup: i for i, tup in enumerate(sorted(next_order_list))}
+    sort_index = {tup: i for i, tup in enumerate(sorted(next_order_list))}  # TODO: currently O(nlog^2n). Implement radix sort for O(nlogn)
     next_order_list = [sort_index[tup] for tup in next_order_list]
     return suffix_sort_recurse(next_order_list, order_list_range*2)
 
