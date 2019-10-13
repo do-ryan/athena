@@ -29,12 +29,6 @@ Sample Output
 # import pdb; pdb.set_trace()
 
 
-def inp():
-    N = int(input())
-    strings = [input() for i in range(N)]
-    return strings
-
-
 def string_to_inverse_suffix_array(string):
     # inverse suffix array has suffix index as index and rank as value
     # suffix array has rank as index and suffix index as value
@@ -72,8 +66,9 @@ def lcp_array_construction(string, suffix_array, inverse_suffix_array):
 
 
 def suffix_sort_recurse(order_list: list, order_list_range: int):
-    if order_list_range > len(order_list) or len(set(order_list)) == len(order_list):
-        # first condition redundant because first condition guarantees second condition
+    """Sort suffixes via recursively compounding in size all characters."""
+    string_length = len(order_list)
+    if len(set(order_list)) == string_length:
         return order_list
     next_order_list = [(order, order_list[i+order_list_range]) if (i+order_list_range < len(order_list))
                        else (order, -1) for i, order in enumerate(order_list)]
@@ -84,10 +79,11 @@ def suffix_sort_recurse(order_list: list, order_list_range: int):
 
 
 if __name__ == "__main__":
-    strings = inp()
+    strings = [input() for i in range(int(input()))]
     for string in strings:
         inverse_suffix_array = string_to_inverse_suffix_array(string)
         suffix_array = invert_suffix_array(inverse_suffix_array)
         n_duplicate_substrings = sum(lcp_array_construction(string, suffix_array, inverse_suffix_array))
-        n_non_distinct_substrings = len(string)*(len(string)+1)//2
-        print(str(n_non_distinct_substrings - n_duplicate_substrings + 1))
+        n = len(string)
+        n_non_distinct_substrings = n*(n+1)//2 + 1
+        print(n_non_distinct_substrings - n_duplicate_substrings)
