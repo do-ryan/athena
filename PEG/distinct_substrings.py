@@ -9,7 +9,7 @@ Note that the empty string and S itself are considered substrings of s.
 On the other hand, if S = "aaa". S has only 4 distinct substrings: "", "a", "aa", "aaa".
 
 Input
-The first line of the input file contains N, the number of test cases. For each test case, a line follows giving S,    
+The first line of the input file contains N, the number of test cases. For each test case, a line follows giving S,
 a string of from 1 to 5000 alphanumeric characters.
 
 Output
@@ -61,7 +61,7 @@ def lcp_array_construction(string, suffix_array, inverse_suffix_array):
         else:
             lcp[k] = 0
             continue
-        while string[i:i+l+1] == string[j:j+l+1]:  # this gets the lcp to the next suffix. 
+        while string[i:i+l+1] == string[j:j+l+1]:  # this gets the lcp to the next suffix.
             l += 1  # l can be max n and decremented at most n times. O(2n) total.
         lcp[k] = l
         if l > 0:
@@ -77,7 +77,8 @@ def suffix_sort_recurse(order_list: list, order_list_range: int):
         return order_list
     next_order_list = [(order, order_list[i+order_list_range]) if (i+order_list_range < len(order_list))
                        else (order, -1) for i, order in enumerate(order_list)]
-    sort_index = {tup: i for i, tup in enumerate(sorted(next_order_list))}  # TODO: currently O(nlog^2n). Implement radix sort for O(nlogn)
+    sort_index = {tup: i for i, tup in enumerate(sorted(next_order_list))}
+    # TODO: currently O(nlog^2n). Implement radix sort for O(nlogn)
     next_order_list = [sort_index[tup] for tup in next_order_list]
     return suffix_sort_recurse(next_order_list, order_list_range*2)
 
