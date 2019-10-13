@@ -46,6 +46,7 @@ def invert_suffix_array(suffix_array):
 
 
 def lcp_array_construction(string, suffix_array, inverse_suffix_array):
+    """Use Kasai's algorithm to construct LCP from suffix array. O(n)"""
     l = 0  # stores the global largest lcp
     lcp = [0]*len(suffix_array)
     for i in range(len(string)):  # start from biggest suffix
@@ -66,7 +67,7 @@ def lcp_array_construction(string, suffix_array, inverse_suffix_array):
 
 
 def suffix_sort_recurse(order_list: list, order_list_range: int):
-    """Sort suffixes via recursively compounding in size all characters."""
+    """Sort suffixes via recursively compounding in size all characters. O(nlogn)"""
     string_length = len(order_list)
     if len(set(order_list)) == string_length:
         return order_list
