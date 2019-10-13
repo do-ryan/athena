@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c5b08779-9e92-45ca-a557-fde65c8e9836" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/PEG/.strategic_bombing.py.swp" beforeDir="false" afterPath="$PROJECT_DIR$/PEG/.strategic_bombing.py.swp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PEG/strategic_bombing.py" beforeDir="false" afterPath="$PROJECT_DIR$/PEG/strategic_bombing.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PEG/distinct_substrings.py" beforeDir="false" afterPath="$PROJECT_DIR$/PEG/distinct_substrings.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -88,11 +87,10 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/PEG/strategic_bombing.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="407">
-              <caret line="63" column="22" lean-forward="true" selection-start-line="63" selection-start-column="22" selection-end-line="63" selection-end-column="22" />
+            <state relative-caret-position="-234">
+              <caret line="62" column="22" lean-forward="true" selection-start-line="62" selection-start-column="22" selection-end-line="62" selection-end-column="22" />
               <folding>
-                <marker date="1570797893560" expanded="true" signature="1325:1330" ph="..." />
-                <marker date="1570797893560" expanded="true" signature="1702:1707" ph="..." />
+                <marker date="1570800339817" expanded="true" signature="1325:1330" ph="..." />
               </folding>
             </state>
           </provider>
@@ -274,9 +272,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="877" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24876674" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.24876674" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -387,11 +384,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/PEG/strategic_bombing.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="407">
-          <caret line="63" column="22" lean-forward="true" selection-start-line="63" selection-start-column="22" selection-end-line="63" selection-end-column="22" />
+        <state relative-caret-position="-234">
+          <caret line="62" column="22" lean-forward="true" selection-start-line="62" selection-start-column="22" selection-end-line="62" selection-end-column="22" />
           <folding>
-            <marker date="1570797893560" expanded="true" signature="1325:1330" ph="..." />
-            <marker date="1570797893560" expanded="true" signature="1702:1707" ph="..." />
+            <marker date="1570800339817" expanded="true" signature="1325:1330" ph="..." />
           </folding>
         </state>
       </provider>
