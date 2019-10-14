@@ -19,7 +19,8 @@ Your task is to write a program that translates a prefix arithmetic expression i
 Input
 Each line contains an arithmetic prefix expression. The operators are + and -,
 and numbers are all single-digit decimal numbers. The operators and numbers are separated by exactly one space
-with no leading spaces on the line. The end of input is marked by 0 on a single line. You can assume that each input line contains a valid prefix expression with less than 20 operators.
+with no leading spaces on the line. The end of input is marked by 0 on a single line.
+You can assume that each input line contains a valid prefix expression with less than 20 operators.
 
 Output
 Translate each expression into postfix notation and produce it on a separate line. The numbers and operators are
@@ -42,28 +43,36 @@ Sample Output
 """
 # import pdb; pdb.set_trace()
 
+
 def inp():
     while True:
-       next = input()
-       if next != '0':
-           yield next 
-       else:
-           break
+        next = input()
+        if next != '0':
+            yield next
+        else:
+            break
 
 
 def prefix_to_postfix(prefix_array: list):
     operand_stack = []
     for char in reversed(prefix_array):
         if char == '+' or char == '-':
-            operand_stack.append(operand_stack.pop() + ' ' +  operand_stack.pop() + ' ' + char)
+            operand_stack.append(
+                operand_stack.pop() +
+                ' ' +
+                operand_stack.pop() +
+                ' ' +
+                char)
         else:
             operand_stack.append(char)
     return ' '.join(operand_stack)
 
 
 if __name__ == "__main__":
-    prefix_eqns = [[char for char in line.split(' ') if char != ' '] for line in inp()]
-    postfix_eqns = [prefix_to_postfix(prefix_eqn) for prefix_eqn in prefix_eqns]
+    prefix_eqns = [[char for char in line.split(
+        ' ') if char != ' '] for line in inp()]
+    postfix_eqns = [prefix_to_postfix(prefix_eqn)
+                    for prefix_eqn in prefix_eqns]
     for postfix_eqn in postfix_eqns:
         print(postfix_eqn)
     pass
