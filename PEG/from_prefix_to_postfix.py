@@ -55,7 +55,7 @@ def prefix_to_postfix(prefix_array: list):
     operand_stack = []
     for char in reversed(prefix_array):
         if char == '+' or char == '-':
-            operand_stack.append([f'{operand_stack.pop()} {operand_stack.pop()} {char}']
+            operand_stack.append(operand_stack.pop() + ' ' +  operand_stack.pop() + ' ' + char)
         else:
             operand_stack.append(char)
     return ' '.join(operand_stack)
