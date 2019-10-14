@@ -57,20 +57,14 @@ def prefix_to_postfix(prefix_array: list):
     operand_stack = []
     for char in reversed(prefix_array):
         if char == '+' or char == '-':
-            operand_stack.append(
-                operand_stack.pop() +
-                ' ' +
-                operand_stack.pop() +
-                ' ' +
-                char)
+            operand_stack.append(operand_stack.pop() + ' ' + operand_stack.pop() + ' ' + char)
         else:
             operand_stack.append(char)
     return ' '.join(operand_stack)
 
 
 if __name__ == "__main__":
-    prefix_eqns = [[char for char in line.split(
-        ' ') if char != ' '] for line in inp()]
+    prefix_eqns = [[char for char in line.split(' ') if char != ' '] for line in inp()]
     postfix_eqns = [prefix_to_postfix(prefix_eqn)
                     for prefix_eqn in prefix_eqns]
     for postfix_eqn in postfix_eqns:
