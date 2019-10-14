@@ -40,3 +40,45 @@ Sample Output
 2 2 1 - +
 3 2 1 + - 9 -
 """
+# import pdb; pdb.set_trace()
+
+def inp():
+    while True:
+       next = input()
+       if next != '0':
+           yield next 
+       else:
+           break
+
+def prefix_to_postfix(prefix_array: list):
+    operand_stack = []
+    postfix_array = []
+    last_char_operand = False
+    for char in reversed(prefix_array):
+        if char == '+' or char == '-':
+            if last_char_operand:
+                if not postfix_array:
+                    postfix_array += [operand_stack.pop(), operand_stack.pop()]
+                else:
+                    postfix_array = [operand_stack.pop()] + postfix_array
+                postfix_array.append(char)
+            else:
+                postfix_array.append(operand_stack.pop())
+                postfix_array.append(char)
+            last_char_operand = False
+        else:
+            operand_stack.append(char)
+            last_char_operand = True
+    if operand_stack:
+        postfix_array += operand_stack
+    return postfix_array
+
+
+if __name__ == "__main__":
+    prefix_eqns = [[char for char in line.split(' ') if char != ' '] for line in inp()]
+    postfix_eqns = [prefix_to_postfix(prefix_eqn) for prefix_eqn in prefix_eqns]
+    for postfix_eqn in postfix_eqns:
+        for char in postfix_eqn:
+            print(char, end=' ')
+        print()
+    pass
