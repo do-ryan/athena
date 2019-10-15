@@ -74,18 +74,34 @@ def delta_function(sequence, median):
 
 
 def count_subseq_median(sequence, median, median_i):
-    delta_l = [delta_function(sequence[i: median_i], median) for i in range(median_i-1, -1, -1)]
-    delta_r = [delta_function(sequence[median_i+1: i+1], median) for i in range(median_i+1, len(sequence))]
+    delta_l = []
+    delta_r = []
     num_subseq = 0
-    for d_l in delta_l:
-        if d_l == 0:
+    for i in range(median_i-1, -1, -1):
+        if sequence[i] < median:
+            delta = -1
+        else:
+            delta = 1
+        if delta_l:
+            delta_l.append(delta + delta_l[-1])
+        else:
+            delta_l.append(delta)
+        if delta_l[-1] == 0:
             num_subseq += 1
-        for d_r in delta_r:
-            if d_l + d_r == 0:
-                num_subseq += 1
-    for d_r in delta_r:
-        if d_r == 0:
+    for i in range(median_i+1, len(sequence)):
+        if sequence[i] < median:
+            delta = -1
+        else:
+            delta = 1
+        if delta_r:
+            delta_r.append(delta + delta_r[-1])
+        else:
+            delta_r.append(delta)
+        if delta_r[-1] == 0:
             num_subseq += 1
+        #for d_l in delta_l:
+        #    if d_l + delta_r[-1] == 0:
+        #        num_subseq += 1
     return num_subseq + 1  # for the trivial case
 
 
