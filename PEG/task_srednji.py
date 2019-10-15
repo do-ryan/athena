@@ -41,8 +41,7 @@ Output
 In the fourth example, the four subsequences of A with median 4 are
 {4}, {7, 2, 4}, {5, 7, 2, 4, 3} and {5, 7, 2, 4, 3, 1, 6}.
 """
-# import pdb
-# pdb.set_trace()
+# import pdb; pdb.set_trace()
 
 
 def inp():
@@ -51,18 +50,46 @@ def inp():
     return median, sequence
 
 
-def count_subseq_median(sequence, median, start, end, new_indices, num_bigger, num_smaller):
+def median_in_list(lis, median):
+    delta = 0
+    for item in lis:
+        if item > median:
+            delta += 1
+        elif item < median:
+            delta -= 1
+    return delta == 0
+
+
+def rec_count_subseq_median(sequence, median, start, end):
     if start < 0 or end >= len(sequence):
         return 0
-    num_bigger += sum([sequence[new_index] > median for new_index in new_indices])
-    num_smaller += sum([sequence[new_index] < median for new_index in new_indices])
-    return count_subseq_median(sequence, median, start - 1, end + 1, [start - 1, end + 1], num_bigger, num_smaller) \
-        + count_subseq_median(sequence, median, start, end + 2, [end + 1, end + 2], num_bigger, num_smaller) \
-        + count_subseq_median(sequence, median, start - 2, end, [start - 1, start - 2], num_bigger, num_smaller) \
-        + (num_bigger == num_smaller)
+    return count_subseq_median(sequence, median, start - 1, end + 1) \
+        + count_subseq_median(sequence, median, start, end + 2) \
+        + count_subseq_median(sequence, median, start - 2, end) \
+        + median_in_list(sequence[start:end+1], median)
 
 
-if __name__ == '__main__':
+def delta_function(sequence, median):
+    return sum([1 if integer > median else -1 for integer in sequence])
+
+
+def count_subseq_median(sequence, median, median_i):
+    delta_l = [delta_function(sequence[i: median_i], median) for i in range(median_i-1, -1, -1)]
+    delta_r = [delta_function(sequence[median_i+1: i+1], median) for i in range(median_i+1, len(sequence))]
+    num_subseq = 0
+    for d_l in delta_l:
+        if d_l == 0:
+            num_subseq += 1
+        for d_r in delta_r:
+            if d_l + d_r == 0:
+                num_subseq += 1
+    for d_r in delta_r:
+        if d_r == 0:
+            num_subseq += 1
+    return num_subseq + 1  # for the trivial case
+
+
+if  __name__ == '__main__':
     median, char_sequence = inp()
     sequence = []
     median_i = None
@@ -73,6 +100,6 @@ if __name__ == '__main__':
             median_i = i
 
     if median_i is not None:
-        print(count_subseq_median(sequence, median, median_i, median_i, [], 0, 0))
+        print(count_subseq_median(sequence, median, median_i))
     else:
         print(0)
