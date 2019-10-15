@@ -61,6 +61,7 @@ def median_in_list(lis, median):
 
 
 def rec_count_subseq_median(sequence, median, start, end):
+    # Works but TLE
     if start < 0 or end >= len(sequence):
         return 0
     return count_subseq_median(sequence, median, start - 1, end + 1) \
