@@ -47,10 +47,37 @@ def inp():
     return [int(input()) for i in range(n)]
 
 
+def compute_ranks(scores, score_rank_dict):
+    def merge_generator(list_l, list_r):
+        n_left_merge = 0
+        while list_l or list_r:
+            if not list_l:
+                score_rank_dict[list_r[-1]] = (score_rank_dict[list_r[-1]][0], score_rank_dict[list_r[-1]][1]
+                                               - n_left_merge)
+                yield list_r.pop()
+            elif not list_r:
+                n_left_merge += 1
+                yield list_l.pop()
+            elif score_rank_dict[list_l[-1]][0] <= score_rank_dict[list_r[-1]][0]:
+                n_left_merge += 1
+                yield list_l.pop()
+            else:
+                score_rank_dict[list_r[-1]] = (score_rank_dict[list_r[-1]][0], score_rank_dict[list_r[-1]][1]
+                                               - n_left_merge)
+                yield list_r.pop()
+    if len(scores) == 1:
+        return scores
+    scores_l = compute_ranks(scores[0:len(scores) // 2], score_rank_dict)
+    scores_r = compute_ranks(scores[len(scores) // 2:], score_rank_dict)
+    scores_l.reverse()
+    scores_r.reverse()
+    return [score for score in merge_generator(scores_l, scores_r)]
+
+
 if __name__ == '__main__':
     """
     Notes:
-        - Need to preserve order of insertion. 
+        - Need to preserve order of insertion.
 
     Approaches:
         - Sequentially insert into sorted list ordered by descending and keep track of rank and n.
@@ -58,11 +85,15 @@ if __name__ == '__main__':
         - Merge sort.
             - Bottom-up: each score is hash-mapped to its insertion order y. This is y in x of y
             100:1 - 200:2 - 150:3 - 170:4 - 50:5
-            100:1 200:1 - 150:3 170:3 - 50:5
-            100:1 150:2 170:2 200:1 - 50:5
-            50:5 100:1 170:2 150:2 200:1
-                - if a score is on the right side of merge, every time a left element is merged before it, decrease score:y by 1. A newer equal score is considered greater. 
-                    - proof: when an element is on the right side of a merge it is being inserted in sorted order to all those before it (on the left side of a merge). The number of left side merge-ins before the element is its number of ranks above last place, therefore subtracting 1 for each from the element's current last place (at time of its record) gives its rank. 
-           - O(nlog(n)) 
+            100:1  200:1 - 150:3 170:3 - 50:5
+            100:1 200:1 - 50:5 150:3 170:3
+            50:5 100:1 150:2 170:2 200:1
+                - if a score is on the right side of merge, every time a left element is merged before it, decrease score:y by 1. A newer equal score is considered greater.
+                    - proof: when an element is on the right side of a merge it is being inserted in sorted order to all those before it (on the left side of a merge). The number of left side merge-ins before the element is its number of ranks above last place, therefore subtracting 1 for each from the element's current last place (at time of its record) gives its rank.
+           - O(nlog(n))
     """
     scores = inp()
+    score_rank_dict = {i: (score, i + 1) for i, score in enumerate(scores)}
+    compute_ranks(list(score_rank_dict.keys()), score_rank_dict)
+    ranks = [rank for score, rank in score_rank_dict.values()]
+    print(str('{0:.2f}'.format(sum(ranks)/len(score_rank_dict.values()))))
