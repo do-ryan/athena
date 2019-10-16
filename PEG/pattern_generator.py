@@ -39,4 +39,4 @@ if __name__ == "__main__":
         leters a in A start off in alphabetical order. Take the first k digits-
         in the scrambling process, we see all the different possible letter combinations, including same combinations for k with different orders. We divide n! by k! to eliminate all the different permutations of the same combinations. We divide again by (n-k)! to eliminate all the different permutations of the remaining letters (last n-k digits). As a result, the number of bit pattern combinations are n!/k!(n-k)!
         - to find all combinations, recursively try both values for each digit and return when k 0s are encountered. O(2^n)
-        - O(n^k) solution: loop over n k times and and find all distinct choices of n in k. the cchoices define where to place the 1s. skip when duplicate location is encountered. big memory use however. Impractical 
+        - O(min(n^k, n^(n-k)) solution: k loops of n times each and and find all distinct choices of n in k. the choices define where to place the 1s. skip when duplicate location is encountered. big memory use however possibly... 
