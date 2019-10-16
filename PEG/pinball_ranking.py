@@ -91,6 +91,7 @@ if __name__ == '__main__':
                 - if a score is on the right side of merge, every time a left element is merged before it, decrease score:y by 1. A newer equal score is considered greater.
                     - proof: when an element is on the right side of a merge it is being inserted in sorted order to all those before it (on the left side of a merge). The number of left side merge-ins before the element is its number of ranks above last place, therefore subtracting 1 for each from the element's current last place (at time of its record) gives its rank.
            - O(nlog(n))
+        - BST: insert (O(logn)) and for every insert recursively traverse parent's left child subtree to find all lower than the insert (O(n)). Total O(nlogn)
     """
     scores = inp()
     score_rank_dict = {i: (score, i + 1) for i, score in enumerate(scores)}
