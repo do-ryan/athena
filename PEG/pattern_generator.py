@@ -29,3 +29,8 @@ The bit patterns are
 0101
 0011
 """
+
+if __name__ == "__main__":
+    """
+    Solution:
+        - n choose k
