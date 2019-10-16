@@ -31,6 +31,11 @@ The bit patterns are
 """
 
 if __name__ == "__main__":
+
     """
     Solution:
         - n choose k
+        - intuition: start with n!, all the ways to scramble letters a_i for i in 1 to N.
+        leters a in A start off in alphabetical order. Take the first k digits-
+        in the scrambling process, we see all the different possible letter combinations, including same combinations for k with different orders. We divide n! by k! to eliminate all the different permutations of the same combinations. We divide again by (n-k)! to eliminate all the different permutations of the remaining letters (last n-k digits). As a result, the number of bit pattern combinations are n!/k!(n-k)!
+        - to find all combinations
