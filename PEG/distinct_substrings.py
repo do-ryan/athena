@@ -66,6 +66,25 @@ def lcp_array_construction(string, suffix_array, inverse_suffix_array):
     return lcp
 
 
+def counting_sort(lis):
+    count = [0]*(max(lis) + 1)
+    cumulative = [0]*len(count)
+    for item in lis:
+        count[item] += 1
+
+    for i, frequency in enumerate(count):
+        if i < len(count) - 1:
+            cumulative[i+1] = cumulative[i] + frequency
+
+    output = [0]*len(lis)
+
+    for item in lis:
+        output[cumulative[item]] = item
+        cumulative[item] += 1
+
+    return output
+
+
 def suffix_sort_recurse(order_list: list, order_list_range: int):
     """Sort suffixes via recursively compounding in size all characters. O(nlogn)"""
     string_length = len(order_list)
