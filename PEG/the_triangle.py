@@ -39,7 +39,6 @@ if __name__ == '__main__':
     triangle = inp()
     for i in range(len(triangle)):
         for j in range(len(triangle[i])):
-            print('loops entered')
             if len(triangle[i]) == 1:
                 break
             elif j == 0:
