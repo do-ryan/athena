@@ -62,8 +62,15 @@ class TrieNode:
         else:
             next_node.value = value
             next_node.word_end = True
+    
+def count_nodes(node: TrieNode):
+    count = 1
+    for next_node in node.path.values():
+        count += count_nodes(next_node)
+    return count
 
 if __name__ == '__main__':
     trie = TrieNode()
     for word in inp():
         trie.insert(word, word)
+    print(count_nodes(trie))        
