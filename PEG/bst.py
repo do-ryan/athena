@@ -78,3 +78,41 @@ Output
 13
 15
 """
+c = 0
+
+def inp():
+    n = int(input())
+    return [input() for _ in range(n)]
+
+class Node:
+    def __init__(self, value, c):
+        self.value = value
+        self.l = None
+        self.r = None
+        self.c = c
+
+    def insert(self, node):
+        node.c += 1 
+        if node.value < self.value:
+            if self.l is None:
+                self.l = node
+            else:
+                self.l.insert(node)
+        elif node.value > self.value:
+            if self.r is None:
+                self.r = node
+            else:
+                self.r.insert(node)
+
+if __name__ == '__main__':
+    c = 0
+    for i, input in enumerate(inp()):
+        this_node = Node(input, c)
+        if i == 0:
+            root = this_node
+        else:
+            root.insert(this_node)
+        print(this_node.c)
+        c = this_node.c
+    
+
