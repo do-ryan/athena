@@ -75,6 +75,7 @@ def delta_function(sequence, median):
 
 
 def count_subseq_median(sequence, median, median_i):
+    """Find index of median. Go down from it, and update count of each delta for each number. If delta is ever 0, upcount number of subseq by 1. Go up from index of median, and upcount number of subseq for each number by the count of the negative delta. if delta is ever 0, upcount number of subseq by 1 as well. """
     delta = 0
     delta_freq = {}
     num_subseq = 0
