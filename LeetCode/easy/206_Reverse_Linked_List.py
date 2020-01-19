@@ -16,6 +16,7 @@ class ListNode:
 class Solution:
     root = None
     def reverseList(self, head: ListNode) -> ListNode:
+        """Recursively reverse linked list."""
         if head is None:
             return
         if head.next is None:
@@ -27,3 +28,14 @@ class Solution:
             head.next.next = head
             head.next = None
         return root
+
+   def reverseList(self, head: ListNode) -> ListNode:
+        """Iteratively reverse linked list."""
+        prev = None
+        curr = head
+        while curr is not None:
+            temp = curr.next
+            curr.next = prev
+            prev = curr
+            curr = temp
+        return prev
