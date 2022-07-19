@@ -26,7 +26,6 @@ model = gp.Model('knapsack')
 # sum of x_s*w_s <= L
 # x_s is a binary
 
-
 N = 100
 
 S = [s for s in range(N)]
@@ -35,8 +34,9 @@ L = 30
 
 x_s = model.addVars(S, vtype=GRB.BINARY, name="x_s")
 
-model.addConstrs(quicksum(x_s[s]*w_s[s] for s in S) <= L)
+model.addConstr(quicksum(x_s[s]*w_s[s] for s in S) <= L)
 
-model.setObjective(quicksum(x_s[s]*w_s[s] for s in S))
+model.setObjective(quicksum(x_s[s]*w_s[s] for s in S), GRB.MAXIMIZE)
 
 model.optimize()
+print([x_s[s].x for s in S])
