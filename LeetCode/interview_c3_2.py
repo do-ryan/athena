@@ -9,6 +9,8 @@ def knapsack(weights: List[int], limit: int):
     global best_solution
     current_max = 0
     
+    # memoization: maintain n by w array, which stores best solution for each n, w state out of all subsequent branching possibilities.  
+    # when an n, w state is visited a second time, simply pull up the best solution out of array in O(1) time.
     def recurse(decisions: list): 
         global current_max
         global best_solution

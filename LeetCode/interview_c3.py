@@ -4,7 +4,6 @@
 # standardize each feature
 
 import numpy as np
-import pandas as pd
 
 def standardize_features(array: np.array):
     # for each column, (datapoint - mean) / std
